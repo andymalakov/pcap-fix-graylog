@@ -11,20 +11,20 @@ import (
 	"github.com/google/gopacket/pcap"
 
 	// Graylog GELF
-	"github.com/duythinht/gelf"
-	"github.com/duythinht/gelf/client"
+	"github.com/GiG/gelf"
+	"github.com/GiG/gelf/client"
 )
 
 var (
-	device      = flag.String("interface", "\\Device\\NPF_Loopback", "Network interface to listen on")
-	snapshotLen = flag.Int("snapshot-length", 262144, "Snapshot length. Utility will snarf given number of bytes from each packet")
-	promiscuous = flag.Bool("promiscuous-mode", false, "Enables promiscuous mode")
-	verbose     = flag.Bool("verbose", false, "Verbose output mode")
-	listMode    = flag.Bool("list-interfaces", false, "Print the list of the network interfaces available on the system")
-	portRange   = flag.String("port-range", "", "Port range in NNNN-MMMM format. For example: 9000-9100")
-	graylogHost = flag.String("graylog-host", "localhost", "Graylog host name")
-	graylogPort = flag.Int("graylog-port", 9001, "Graylog port")
-	serverName  = flag.String("server-name", "fix-log", "Server name as it will appear in Graylog logs")
+	device         = flag.String("interface", "\\Device\\NPF_Loopback", "Network interface to listen on")
+	snapshotLen    = flag.Int("snapshot-length", 262144, "Snapshot length. Utility will snarf given number of bytes from each packet")
+	promiscuous    = flag.Bool("promiscuous-mode", false, "Enables promiscuous mode")
+	verbose        = flag.Bool("verbose", false, "Verbose output mode")
+	listMode       = flag.Bool("list-interfaces", false, "Print the list of the network interfaces available on the system")
+	portRange      = flag.String("port-range", "", "Port range in NNNN-MMMM format. For example: 9000-9100")
+	graylogHost    = flag.String("graylog-host", "localhost", "Graylog host name")
+	graylogPort    = flag.Int("graylog-port", 9001, "Graylog port")
+	serverName     = flag.String("server-name", "fix-log", "Server name as it will appear in Graylog logs")
 	skipHeartbeats = flag.Bool("skip-heartbeats", true, "Skip FIX Heartbeat(0) messages")
 
 	timeout          time.Duration = pcap.BlockForever
@@ -36,7 +36,6 @@ var (
 )
 
 //TODO: Filter out heartbeats
-//TODO:
 
 func main() {
 	flag.Parse()
@@ -139,7 +138,7 @@ func process(packet gopacket.Packet) {
 }
 
 func processFIXPayload(timestamp time.Time, payload []byte) {
-	
+
 	// if (*skipHeartbeats) {
 	// 	if ()
 	// }
