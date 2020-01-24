@@ -120,6 +120,9 @@ func process(packet gopacket.Packet) {
 			var payload = applicationLayer.Payload()
 
 			//fmt.Printf("Packet length %d, payload length: %d\n", captureInfo.Length, len(payload))
+			if *verbose {
+				fmt.Printf("%s: %s\n", timestamp.Format(time.RFC822), payload)
+			}
 
 			if len(payload) > 8 {
 				// Check for "8=FIX." header
@@ -144,10 +147,6 @@ func processFIXPayload(timestamp time.Time, payload []byte) {
 	// }
 
 	replaceSOH(payload)
-
-	if *verbose {
-		fmt.Printf("%s: %s\n", timestamp.Format(time.RFC822), payload)
-	}
 
 	logMessage := logPacket(timestamp, payload).ToJSON() //TODO: Generate JSON using string builder?
 
