@@ -121,7 +121,7 @@ func process(packet gopacket.Packet) {
 
 			//fmt.Printf("Packet length %d, payload length: %d\n", captureInfo.Length, len(payload))
 			if *verbose {
-				fmt.Printf("%s: %s\n", timestamp.Format(time.RFC822), payload)
+				fmt.Printf("%s: %s\n", captureInfo.Timestamp.Format(time.RFC822), payload)
 			}
 
 			if len(payload) > 8 {
